@@ -35,9 +35,6 @@ export default function FormInputSelect ({
             },
             ...options,
           ]
-        const selectedIndex = resolvedOptions.findIndex(
-          d => d.value === getValue()
-        )
         const nullIndex = resolvedOptions.findIndex(d => d.value === '')
         return (
           <select
@@ -47,11 +44,11 @@ export default function FormInputSelect ({
               setValue(val, noTouch)
             })}
             onBlur={buildHandler(onBlur, () => setTouched())}
-            value={selectedIndex > -1 ? selectedIndex : nullIndex}
+            value={getValue()}
           >
             {resolvedOptions.map((option, i) => {
               return (
-                <option key={option.value} value={i} disabled={option.disabled}>
+                <option key={option.value} value={option.value} selected={ getValue() === option.value } disabled={option.disabled}>
                   {option.label}
                 </option>
               )
